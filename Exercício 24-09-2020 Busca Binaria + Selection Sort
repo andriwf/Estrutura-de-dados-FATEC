@@ -1,0 +1,72 @@
+#include<iostream>
+using namespace std;
+
+int valor=0;
+
+void selectionSort(int itens[], int tam){
+	for(int i =0; i<tam-1; i++){
+		int min = i;
+		for(int j=i+1; j<tam; j++){
+			if(itens[j]<itens[min])
+				min=j;
+		}
+		int aux = itens[min];
+		itens[min]=itens[i];
+		itens[i] = aux;
+	}
+}
+
+int buscabinaria(int chave, int arquivo[], int tam){
+	int pos=-1;
+	if(tam==0){
+		return pos;
+	}else{
+		int ini = 0; int fim = tam-1;
+		do{
+			pos = (ini+fim)/2;
+			if(chave < arquivo[pos]){
+				fim = pos -1;
+			}else{
+				ini = pos+1;
+			}
+		}while(chave!=arquivo[pos] && ini <= fim);
+	}
+	if(chave==arquivo[pos]){
+		return pos+1;
+	}else{ 
+		cout<<"O valor "<<valor<<" buscado nao esta no vetor";		
+	}
+}
+
+void printarray(int arg[], int tam){
+	for(int n=0; n<tam; n++){
+		cout<< arg[n] << " ";
+	}
+}
+
+int main(){
+
+	int array2[10]= {0};
+	cout<<"Digite numeros para o primeiro vetor: \n";
+
+    for(int i=0; i<10; i++){
+
+        cin>>array2[i];
+    }
+
+	cout<<"Qual o valor a ser buscado: ";
+	cin>>valor;
+
+	cout<<"\n";
+	cout<<"Vetor = ";
+	printarray(array2,10);
+	cout<<"\n";
+	cout<< "Vetor ordenado = ";
+	selectionSort(array2,10);
+	printarray(array2,10);
+	cout<<"\n";
+	cout <<"\nO Valor "<<valor<<" esta na posicao: [ "<< buscabinaria(valor,array2,10)<<" ]";
+}
+
+
+
